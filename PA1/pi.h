@@ -7,6 +7,9 @@
 #include <mpi.h>
 
 double pi_calc(long int n) {
+
+    MPI_Init(NULL, NULL); //initialize the MPI Environment
+
     int rank, size;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank); //get rank of current process
     MPI_Comm_size(MPI_COMM_WORLD, &size); //get total number of processes
@@ -37,5 +40,6 @@ double pi_calc(long int n) {
         pi_estimate = 4.0 * global_count / n;
     }
 
+    MPI_Finalize(); //finalizes the MPI environment
     return pi_estimate;
 }
